@@ -1,0 +1,21 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: quote-function
+spec:
+#  template:
+#    metadata:
+#      autoscaling.knative.dev/minScale: "1"
+    spec:
+      containers:
+        - name: quote-function
+          image: ghcr.io/azimbabu/quote-function
+          ports:
+            - containerPort: 9102
+          resources:
+            requests:
+              cpu: '0.1'
+              memory: '128Mi'
+            limits:
+              cpu: '2'
+              memory: '512Mi'
