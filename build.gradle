@@ -38,8 +38,9 @@ tasks.named('test') {
 }
 
 tasks.named('bootBuildImage') {
+    builder = 'paketobuildpacks/builder:tiny'
     imageName = "${project.name}"
-    environment = ['BP_NATIVE_IMAGE': 'true', "BP_NATIVE_IMAGE_BUILD_ARGUMENTS": " -march=compatibility"]
+    environment = ['BP_NATIVE_IMAGE': 'true', "BP_NATIVE_IMAGE_BUILD_ARGUMENTS": "-march=compatibility"]
 
     docker {
         publishRegistry {
@@ -47,10 +48,5 @@ tasks.named('bootBuildImage') {
             password = project.findProperty("registryToken")
             url = project.findProperty("registryUrl")
         }
-
-//        if (System.getProperty("os.arch").toLowerCase().startsWith('aarch')) {
-//            // This builder is only for ARM64 systems.
-//            builder = "dashaun/builder:tiny"
-//        }
     }
 }
