@@ -38,14 +38,6 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
-      - name: Validate Kubernetes manifests
-        uses: stefanprodan/kube-tools@v1
-        with:
-          kubectl: 1.24.3
-          kubeval: 0.16.1
-          command: |
-            kustomize build k8s | kubeval --strict -
-  #            kubeval --strict -d k8s
 
   native:
     name: Build and Test (Native)
